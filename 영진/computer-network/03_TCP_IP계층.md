@@ -123,8 +123,10 @@ PORT주소를 관리
 ### C. 네트워크계층(Network) === 인터넷계층(Internet) 
 
 인터넷환경은 다양한 네트워크의 조합
+
 ![](https://ars.els-cdn.com/content/image/3-s2.0-B9780123744944000153-f15-06-9780123744944.jpg)
-네트워크계층은 네트워크간 데이터 전송에 필요한 논리적 기능 담당
+
+네트워크계층은 네트워크간 데이터 전송에 필요한 논리적 기능을 담당
 - 네트워크를 구별하는 논리주소 지정, 네트워크간 라우팅
 - 네트워크 연결 유지/설정/해제
 
@@ -143,9 +145,11 @@ PORT주소를 관리
 
 ### D. 링크계층(Network Interface or Network Access)
 
-같은 네트워크 내부에서 데이터를 전송
+같은 네트워크 내부에서도 데이터 전송 규약이 필요
+
 ![](https://3.bp.blogspot.com/_Ede6sUzdNz0/TOVYK-yio5I/AAAAAAAAABI/91Uhmt1cEe0/s640/Simple+Hub-and-spoke.png)
-데이터 전송 및 통신에 필요한 기능을 담당
+
+링크계층이 한 네트워크 내부에서의 데이터 전송 및 통신에 필요한 기능을 담당
 - 비트전송
 - 비트를 가공하여 프레임을 전송
 - 노드를 구별하는 물리주소 지정
@@ -181,16 +185,21 @@ PORT주소를 관리
 
     - 표기법
         - 도트형십진표기
-        ![](https://media.geeksforgeeks.org/wp-content/cdn-uploads/IP_addressing_1.jpg)
-            - IPv4에 이용
-            - 8비트씩 잘라 십진수로 변환
-            - `.`으로 단위를 구분
-            - 8비트로 나타낼 수있는 수는 0부터 255까지
-            - 256이상의 수치가 포함된것은 IP주소가아님
+
+          ![](https://media.geeksforgeeks.org/wp-content/cdn-uploads/IP_addressing_1.jpg)
+          - IPv4에 이용
+          - 8비트씩 잘라 십진수로 변환
+          - `.`으로 단위를 구분
+          - 8비트로 나타낼 수있는 수는 0부터 255까지
+          - 256이상의 수치가 포함된것은 IP주소가아님
+          
+          <br>
 
         - 십육진수 표기
+
+            ![](https://media.geeksforgeeks.org/wp-content/uploads/20230620171208/1212.jpg)
+
             - IPv6에 이용
-        ![](https://media.geeksforgeeks.org/wp-content/uploads/20230620171208/1212.jpg)
 
     <br>
     
