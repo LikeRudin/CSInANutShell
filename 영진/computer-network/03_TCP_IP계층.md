@@ -464,7 +464,7 @@ PORT주소를 관리
 |속도|더 빠름 |느림|
 |주소공간비트|128|32|
 |보안기능|내장|IPSec 미설치시 없음|
-|표기법|십진도트|십육진수|
+|표기법|십육진수|십진도트|
 
 ### 헤더구조
 ![](https://www.networkacademy.io/sites/default/files/inline-images/comparing-ipv4-and-ipv6-headers.png)
