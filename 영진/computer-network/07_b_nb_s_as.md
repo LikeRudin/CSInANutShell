@@ -155,7 +155,7 @@ https://developer.ibm.com/developer/default/articles/l-async/images/figure1.gif"
 
 ### 1. 자바스크립트의 async /await 패턴, 콜백 패턴은 각각 어떤 IO 패턴과 유사한가요? 
 
-### 2. Non-Blocking / Synchronous 패턴은 자바스크립트 비동기함수 처리의 어떤 상황인가요?
+### 2. Non-Blocking / Synchronous 패턴을 자바스크립트 비동기함수 처리를 이용하여 묘사해보세요
 
 # ANSWERS
 
@@ -199,7 +199,8 @@ otherFunction();
 물론 자바스크립트는 하나의 함수 콜 스택을 가지고 있기 때문에 완전한 non-blocking이라고 말할순 없습니다. 
 
 
-### 2. Non-Blocking / Synchronous 패턴은 자바스크립트 비동기함수 처리로 묘사해보세요
+### 2. Non-Blocking / Synchronous 패턴을 자바스크립트 비동기함수 처리를 이용하여 묘사해보세요
+
 
 외부 api로 보낸 요청이 도착하기전에, 해당 요청을 저장할 변수를 사용하면 잘못된 데이터가 사용됩니다.
 
