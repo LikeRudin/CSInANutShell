@@ -20,7 +20,7 @@ IPC
 ## 1. IPC 개요
 
 IPC(Inter Process Communication)
-내부 프로세스간 통신
+프로세스간 통신
 
 ### 필요한 이유
 
