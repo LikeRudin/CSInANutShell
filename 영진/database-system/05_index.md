@@ -107,14 +107,14 @@ text 컬럼을 사용하여 full-text search 연산을 가능하게함.
 
 ### A1
 
-더 빠른 읽기작업의 수행을 위해서입니다.
-인덱스의 구현은 필수가아닙니다.
+인덱스의 목표는 더 빠른 읽기작업의 수행입니다.
 
-일반 자료 말고 인덱스를 구성하는 메타데이터를 생성해야하기때문에
-쓰기작업의 성능이 저하됩니다.
+쓰기작업을 수행할때 사용자 데이터 뿐만아니라
+인덱스를 구성하는 메타데이터를 생성해야하기때문에 성능이 저하됩니다.
 
 ---
 
 # References
 
 https://www.prisma.io/blog/improving-query-performance-using-indexes-1-zuLNZwBkuL#storing-books-in-smaller-shelves-partitioning
+https://www.cs.usfca.edu/~galles/visualization/BTree.html
