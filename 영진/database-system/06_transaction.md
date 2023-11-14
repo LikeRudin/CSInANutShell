@@ -24,110 +24,111 @@
 
 ## 1.1 definitions
 
-1. 일반 명사
+1. 일반 명사 Transaction
 
-```
-an exchange or interaction between people.
-an instance of buying or selling something; a business deal.
+   ```
+   an exchange or interaction between people.
+   an instance of buying or selling something; a business deal.
 
-사람간 거래나 상호작용
-무언가를 사고 파는 행위. 사업적 거래
-```
+   사람간 거래나 상호작용
+   무언가를 사고 파는 행위. 사업적 거래
+   ```
 
 2. Transaction processing
 
-```
-Allowing clients to make low-latency reads and writes
-- opposed to batch processing jobs
+   ```
+   Allowing clients to make low-latency reads and writes
+   - opposed to batch processing jobs
 
-client에게 낮은 지연시간의 read 와 write 연산을 제공하는것.
-```
+   client에게 낮은 지연시간의 read 와 write 연산을 제공하는것.
+   ```
 
 3. Transaction in Practice
 
-![](https://images.contentful.com/po4qc9xpmpuh/3CQA2Vahq9s71Iifwz8SHG/15acd162da3b04a09d5c048aa121ce8d/database-transaction-2.png)
+   ![](https://images.contentful.com/po4qc9xpmpuh/3CQA2Vahq9s71Iifwz8SHG/15acd162da3b04a09d5c048aa121ce8d/database-transaction-2.png)
 
-```
-a set of related tasks treated as a single action.
+   ```
+   a set of related tasks treated as a single action.
 
-데이터베이스의 상태를 변화시키기 수행하는 작업.
-여러 연산 작업을 하나의 단위로 묶은것.
-
-```
+   데이터베이스의 상태를 변화시키기 수행하는 작업.
+   여러 연산 작업을 하나의 단위로 묶은것.
+   ```
 
 # 2. ACID에 대한 사실과 오해
 
 ## 2.1 ACID?
 
-- 개요
-  트랜잭션, 혹은 데이터베이스 연산이 갖춰야 할 특성을 나타내는 용어
-
 - Atomicity(원자성), Consistency(일관성), Isolation(독립성), Durability(영속성)의 약어
+
+- 트랜잭션, 혹은 데이터베이스 연산이 갖춰야 할 특성을 나타내는 용어
 
 - 문제점
 
-- Overload: 이미 CS에서 다른 의미로 사용되고있는 용어가 존재함.
+  - term Overload: 이미 CS에서 다른 의미로 사용되고있는 용어가 존재함.
+  - consistency는 사실 데이터베이스와 관련이없음
 
-- 데이터베이스와 관련이없음
-  - 어플리케이션의 구현에따라 정해짐
-- 구현의 어려움
+    - 어플리케이션의 구현과 관련이 있는 성질
 
-  - 어떤 성질은 실제 구현이 불가능함
+  - 구현의 어려움
 
-- ACID 특성들을 완전히 지원한다고 주장하는 DB는 없음
-  - 또 각각의 데이터베이스가 제시하는 ACID는 서로 다른 형태를 가지고 있음
+    - durability는 실제 구현가능한 성질이 아님
+
+  - 이처럼 ACID를 나타내는 용어들은 상기한것처럼 애매하다는 평가를 받고있음
+    - 자신의 DB 제품이 ACID 특성들을 완전히 지원한다고 주장하는 회사는 없음
+    - 또 각각의 데이터베이스가 제시하는 ACID에대한 개념이나 형태도 조금씩 다름
 
 ### Atomic(원자성)
 
-1. 일반적 의미
+1. Atomic의 일반적 의미
 
-```
-of or forming a single irreducible unit or component in a larger system.
+   ```
+   of or forming a single irreducible unit or component in a larger system.
 
-커다란 시스템속에서 더이상 나눠질수없는 최소단위 혹은 구성요소
-```
+   커다란 시스템속에서 더이상 나눠질수없는 최소단위 혹은 구성요소
+   ```
 
 2. in transaction
 
-```
-Ensures that either all or none operations of the transactions succeed.
-The transaction is either committed successfully or aborted and rolled back.
+   ```
+   Ensures that either all or none operations of the transactions succeed.
+   The transaction is either committed successfully or aborted and rolled back.
 
-하나의 트랜잭션으로 묶인 연산들은 전부 성공하여 결과가 데이터베이스에 반영되거나,
-전부 실패하여 취소되어야 함
-```
+   하나의 트랜잭션으로 묶인 연산들은 전부 성공하여 결과가 데이터베이스에 반영되거나,
+   전부 실패하여 취소되어야 함
+   ```
 
 키포인트
 
 - 트랜잭션 작업 수행중 한 구간에서 오류가 발생하면, 연관된 작업을 모두 폐기 할 수있음
 
-### Consistency(일관성)
+### Consistent(일관성)
 
-1. 일반적 의미
+1. Consistent의 일반적 의미
 
-```
-conformity in the application of something,
-typically that which is necessary for the sake of logic, accuracy, or fairness.
+   ```
+   conformity in the application of something,
+   typically that which is necessary for the sake of logic, accuracy, or fairness.
 
-어플리케이션과 같은것에 존재하는 통일성
+   어플리케이션과 같은것에 존재하는 통일성
 
-논리안정성, 정확성 또는 공정성을 요구하는 곳에서
-필수적으로 요구되는 성질
-```
+   논리안정성, 정확성 또는 공정성을 요구하는 곳에서
+   필수적으로 요구되는 성질
+   ```
 
 2. in transaction
 
-```
-Ensures that the states of the database before and after the transaction are valid (i.e. any existing invariants about the data are maintained).
+   ```
+   Ensures that the states of the database before and after the transaction are valid (i.e. any existing invariants about the data are maintained).
 
-트랜잭션 작업 전후의 데이터베이스 상태는 전부 유효한 상태여야 한다.
-```
+   트랜잭션 작업 전후의 데이터베이스 상태는 전부 유효한 상태여야 한다.
+   ```
 
 키포인트
 
-- 특정 값은 데이터베이스의, 모든 부분에서 같아야함
+- 특정 값은 데이터베이스의, 모든 부분에서 같아야한다는 성질
 
   ```
+  ex)
   상업용 프로그램에서 전화번호와 같은 회원정보가
   이런저런 테이블에 동시에 존재한다면,
   한 회원에대한 정보는 어떤 테이블에서도 같아야함
@@ -135,45 +136,48 @@ Ensures that the states of the database before and after the transaction are val
 
 ### Isolated(독립성)
 
-1. 일반적 의미
+1. Isolated의 일반적 의미
 
-```
-far away from other places, buildings, or people; remote.
+   ```
+   far away from other places, buildings, or people; remote.
 
-(형용사 )다른것들로부터 떨어저 고립되어있는
-```
+   다른것들로부터 떨어져있는, 고립되어있는
+   ```
 
 2. in transaction
 
-```
-Ensures that concurrently running transactions have the same effect
- as if they were running in serial.
+   ```
+   Ensures that concurrently running transactions have the same effect
+    as if they were running in serial.
 
-병행처리되는 트랜잭션들은 순차적으로 실행되어도
-똑같은 효과를 가져야 한다
-```
+   병행처리되는 트랜잭션들을 순차적으로 실행하여도
+   똑같은 효과를 가져야 한다
+   ```
 
 - 키 포인트: 여러개의 트랜잭션들이 동시에 실행되어도,
   각각의 트랜잭션의 서로의 결과에 영향을 미치면 안됨
 
 ### Durability(영속성)
 
-1. 일반적 의미
+1. Durability의 일반적 의미
 
-```
-the ability to withstand wear, pressure, or damage.
+   ```
+   the ability to withstand wear, pressure, or damage.
 
-여러 해악으로부터 손상을 입지않는 능력
-```
+   여러 해악으로부터 손상을 입지않는 능력
+   ```
 
 2. in transaction
 
-```
-Ensures that after the transaction succeeded,
-any writes are being stored persistently.
+   ```
+   Ensures that after the transaction succeeded,
+   any writes are being stored persistently.
 
-트랜잭션이 성공하고나서, 그 결과는 데이터베이스에 영구적으로 반영되어야함
-```
+   트랜잭션이 성공하고나서, 그 결과는 데이터베이스에 영구적으로 반영되어야함
+   ```
+
+키포인트: 연산의 결과는 정상적으로 데이터베이스에 완전히 반영되어야하며,
+훼손되면 안됨
 
 ## 2.2 ACID의 문제점
 
@@ -200,22 +204,28 @@ any writes are being stored persistently.
 
 오히려 결과의 성공을 한번에 반영한다는점이 문제가 될수도있음
 
-1. 전체 작업은 성공했으나 네트워크 오류가 발생하여 저장에 실패한경우
-   모든과정을 다시수행해야 하므로 컴퓨팅자원의 낭비가 발생함
+rollback의 단점
 
-2. 중간 작업결과의 손실은 치명적임
+1.  중간 작업결과의 손실은 치명적
 
-3. 트랜잭션에 안주하게되면 더 나은 오류제어 방법을 고안하는데에 게을러짐
+    - 전체 작업은 성공했으나 네트워크 오류가 발생하여 한가지 연산의 결과 저장에 실패한경우
+      모든과정을 다시수행해야 함
+
+    - 컴퓨팅자원의 낭비가 극심
+
+2.  트랜잭션에 안주하게되면 더 나은 오류제어 방법을 고안하는데에 게을러짐
 
 # 4. 트랜잭션의 분류
 
 ## Multi Object Transaction
 
 데이터 동기화를위해 여러개의 자료구조 (row, table,record )등을 한번에 업데이트해야하는 연산
-엄밀하게 따지지않은 일반적인 트랜잭션을 일컫을때 이 연산을 나타냄
 
-- 현재 noSQL및 여러 DB들이 버리고있음
-  - 분산저장 DB시스템의 사용과 db 규모의 변경에서 치명적으로 불편함
+- 일반적으로 트랜잭션을 일컫을때 이 연산을 나타냄
+
+- 현재 noSQL및 여러 Db관련 프로그램에서 사용을 줄이고 있음
+  - 분산저장 DB시스템의 사용 또는 db scale 변경작업에서 치명적으로 불편함
+  - prisma orm이 지원하는 Transaction api도 단 하나의 네트워크요청만 발생시킴
 
 ## Single Object Transaction
 
