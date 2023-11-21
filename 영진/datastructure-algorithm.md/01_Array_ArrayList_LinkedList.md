@@ -252,7 +252,7 @@ export class SinglyLinkedList<T> implements LinkedList<T> {
 | 임의접근      | X                  | 인덱스                | 인덱스                        |
 | 노드 이동방식 | 노드의 pointer     | 인덱스                | 인덱스                        |
 | 크기          | 가변               | 고정                  | 가변                          |
-| 장점          | 삭제와 삽입이 빠름 | 인덱스로인한 빠른접근 | 언어가 자료구조의 크기를 선택 |
+| 장점          | 삭제와 삽입이 빠름 | 인덱스로인한 빠른접근 | 언어별로 다른 Resizing factor에 의해 크기 상승률이 결정|
 
 # Question
 
