@@ -339,8 +339,7 @@ class BinarySearchTree {
 
 # Question
 
-1. 균형 이진 탐색트리에서 검색작업의 시간복잡도는 O(log(n)) 입니다.
-   이 시간복잡도를 도출해보세요.
+1.  균형 이진 탐색트리에서 검색작업의 시간복잡도는O(log(n)) 입니다. 시간 복잡도의 도출과정을 보여주세요
 
 ---
 
@@ -365,11 +364,3 @@ https://www.geeksforgeeks.org/difference-between-linear-and-non-linear-data-stru
 https://www.geeksforgeeks.org/introduction-to-tree-data-structure-and-algorithm-tutorials/
 
 https://www.geeksforgeeks.org/binary-search-tree-data-structure/
-
-$$
-
-
-$$
-
-$$
-$$
