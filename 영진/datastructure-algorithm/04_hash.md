@@ -49,8 +49,8 @@ data에 같은 유형의 key를 부여하여 저장
 
 motivation
 
-data 규격을 일치시키면 컴퓨터가 무한한 데이터를 유한한 공간에
-효율적인 방식으로 저장할 수있다.
+data 규격을 일치시키면 컴퓨터가 무한한 데이터를 유한한 데이터로 바꾸어 사용함으로써
+데이터 저장을 좀더 효율적이게 개선시킬 수있다.
 
 예시
 
@@ -79,9 +79,9 @@ sky: 4bf0005d3147255b34ef22ba76edfeb7
 chloe: 80546fd2ac1eb154a9db311d11833a7e
 
 
-이렇게 다양한 구성, 다양한 길이의 data들을
-특정 길이의 소문자 알파벳과 숫자의 조합으로 변환시킴으로써,
-저장소의 용량을 쉽게 계산할수 있다.
+이렇게 다양한 구성, 다양한 길이의 비밀번호 data를 그대로 저장하지 않고,
+특정 길이의 소문자 알파벳과 숫자의 조합으로 변환시킨 key를 저장함으로써,
+좀더 예측 가능한 data (key)를 저장할 수있다.
 ```
 
 ![](https://media.geeksforgeeks.org/wp-content/uploads/20220701080941/ComponentsofHashing-660x342.png)
@@ -104,13 +104,16 @@ hashvalue:
 
 Key:value 순서쌍으로
 Hash Function에 의해 생성된 값을 저장하는 자료구조
+
 주로 dictionary, array를 사용한다.
 
 ## Hash Collision
 
 ```
-서로 다른 data의 hash value가 일치하여,
-저장할 장소에 이미 다른 값이 저장되어있는 현상
+서로 다른 data의 hash value가 같은 값을 갖는 현상
+
+서로 다른 data를 hash function에 입력했을때,같은 hash value가 출력되어,
+나중에 입력해준 값을 해당 hash value에 대응하는 위치에 저장할 수없는현상
 
 무한한 유형의 data를 유한한 개수의 hash value중 하나로 변환시키므로
 다른 data지만, 같은 hash value로 변환될 수있음
@@ -122,17 +125,19 @@ Hash Function에 의해 생성된 값을 저장하는 자료구조
 
 ### Separate Chaining
 
-Hash table를 단순한 Array가 아니라, LinkedList의 Array로 구현하여,
-신규 데이터를 LinkedList의 뒷부분에 새 Node로 추가하여 충돌을 방지함
+Hash table를 단순한 Array가 아니라, LinkedList의 Array로 구현
+
+collison이 발생하는 상황에서, 신규 데이터를 LinkedList의 뒷부분에 새 Node를 추가하는 방식으로 저장하여 충돌을 방지
 
 ![](https://media.geeksforgeeks.org/wp-content/cdn-uploads/gq/2015/07/hashChaining1.png)
 
 - 장점
 
   - 구현이 쉬움
-  - 저장소에 남은 공간이 있는한, 절대 Table이 가득차지 않음.
+  - 물리적으로 저장소에 남은 공간이 있는한, 절대 Table이 가득차지 않음.
 
 - 단점
+
   - 속도가 느림
     - LinkedList에서의 검색은 O(n)의 시간복잡도를 가짐
   - 저장공간 사용 효율이 안좋음
@@ -158,7 +163,7 @@ Seperate chaining과는 다르게, 일반적인 HashTable에 데이터를 저장
 
 - 단점
   - 구현이 좀더 복잡함
-  - Hash table이 가득 차면 별수없음
+  - Hash table에 넣을수 있는 정보량의 한계가 존재함
 
 ---
 
