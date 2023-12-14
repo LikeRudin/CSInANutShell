@@ -62,6 +62,7 @@
 (오름차순 기준)
 
 기준점(pivot)을 선정해 그 기준보다 작은 요소들은 왼쪽으로,
+
 큰 요소들은 오른쪽으로 재배치하는 과정을 재귀적으로 반복하는 알고리즘
 
 ### 구현개요
@@ -70,65 +71,62 @@
 
 1. 피벗 선택: 배열의 가장 오른쪽 요소를 피벗으로 선택한다.
 
-2. 고정 포인터 설정: 피벗보다 작은 값을 찾기 위해 왼쪽 끝에 포인터 i 를 하나 둔다
+2. 고정 포인터 설정: 피벗보다 작은 값을 저장할 위치를 가리키는 포인터 i를 왼쪽 끝에 둔다
 
 3. 이동 포인터 설정: 왼쪽끝에서 피벗을 향해 이동하는 포인터 j를 둔다.
 
-4. 성분 교환: 이동 포인터는 현재 가리키는 요소가 피벗보다 작은 값을 갖는다면, 이동을 멈추고
+4. 성분 교환: 이동 포인터가 현재 가리키는 성분이 피벗보다 작은 값을 갖는다면, 이동을 멈추고
    고정 포인터가 가리키는 요소위치를 변경한다.
 
-5. 요소 교환: 포인터가 멈출 때마다, 포인터가 가리키는 요소와 피벗보다 작은 다음 요소의 위치를 교환한다.
-
-피벗 교환: 포인터가 배열의 오른쪽 끝에 도달하면, 포인터가 가리키는 위치의 다음 요소(피벗의 바로 왼쪽 요소)와 피벗의 위치를 교환한다.
+5. 피벗 교환: 포인터가 배열의 오른쪽 끝에 도달하면,
+   포인터가 가리키는 위치의 다음 요소(피벗의 바로 왼쪽 요소)와 피벗의 위치를 교환한다.
 
 분할 및 반복: 이제 피벗은 최종 위치에 있으며, 피벗을 기준으로 배열을 두 부분으로 나눈다. 각 부분에 대해 동일한 과정을 반복하여 정렬을 완료한다.
-
-###
 
 ### 구현
 
 ```ts
 class QuickSorter {
-	constructor(arr) {
-		this.arr = [...arr];
-	}
+  constructor(arr) {
+    this.arr = [...arr];
+  }
 
-	private swapAndPartition(left, right) {
-		// pivot: right, 배열의 가장 우측값
-		const pivot = this.arr[right];
+  private swapAndPartition(left, right) {
+    // pivot: right, 배열의 가장 우측값
+    const pivot = this.arr[right];
 
-		// i: pivot보다 작은값을 이동시킬 지점
-		let i = left - 1;
+    // i: pivot보다 작은값을 이동시킬 지점
+    let i = left - 1;
 
-		// j: pivot과 원소를 비교할 포인터
-		for (let j = left; j < right; j++) {
-			// 값이 피벗보다 작으면, 왼쪽(i)로 보냄
-			if (this.arr[j] < pivot) {
-				i++;
-				[this.arr[i], this.arr[j]] = [this.arr[j], this.arr[i]];
-			}
-		}
-		// loop가 끝난후, 인덱스가 i 이하인 위치의 모든 값은 pivot보다 작은 값이 존재함
+    // j: pivot과 원소를 비교할 포인터
+    for (let j = left; j < right; j++) {
+      // 값이 피벗보다 작으면, 왼쪽(i)로 보냄
+      if (this.arr[j] < pivot) {
+        i++;
+        [this.arr[i], this.arr[j]] = [this.arr[j], this.arr[i]];
+      }
+    }
+    // loop가 끝난후, 인덱스가 i 이하인 위치의 모든 값은 pivot보다 작은 값이 존재함
 
-		// 피벗을 i + 1로 이동
-		[this.arr[i + 1], this.arr[right]] = [this.arr[right], this.arr[i + 1]];
+    // 피벗을 i + 1로 이동
+    [this.arr[i + 1], this.arr[right]] = [this.arr[right], this.arr[i + 1]];
 
-		// 피벗을 기준으로 양쪽으로 나눔
-		return i + 1;
-	}
-	private sortStart(left, right) {
-		if (left < right) {
-			const partitioningIndex = this.swapAndPartition(left, right);
+    // 피벗을 기준으로 양쪽으로 나눔
+    return i + 1;
+  }
+  private sortStart(left, right) {
+    if (left < right) {
+      const partitioningIndex = this.swapAndPartition(left, right);
 
-			this.sortStart(left, partitioningIndex - 1);
-			this.sortStart(partitioningIndex + 1, right);
-		}
-	}
+      this.sortStart(left, partitioningIndex - 1);
+      this.sortStart(partitioningIndex + 1, right);
+    }
+  }
 
-	sort() {
-		this.sortStart(0, this.arr.length - 1);
-		return this.arr;
-	}
+  sort() {
+    this.sortStart(0, this.arr.length - 1);
+    return this.arr;
+  }
 }
 
 const quickSorter = new QuickSorter([10, 7, 8, 9, 1, 4, 2, 5, 12]);
@@ -152,7 +150,7 @@ n \* $\log n$ 이 된다.
 최악의 경우: $n^2$
 
 - 이미 목표 정렬 방향의 역순으로 정렬으로 정렬된 경우
-  - 분할도 제대로 되지않고, n번 위치를 바꿔
+  - 분할도 제대로 되지않고, n번 위치를 바꿔야 하므로 n 제곱의 시간복잡도가 소요된다
 
 5 4 3 2 `1`
 
@@ -168,8 +166,7 @@ n \* $\log n$ 이 된다.
 
 ## 2.2 병합 정렬 (Merge Sort)
 
-리스트를 절반으로 계속해서 나눈 뒤,
-길이가 1인 리스트가 나오면, 마지막 분할에서 합쳐져있던 원소끼리 정렬을 수행한 후
+리스트를 절반으로 분할하고, 정렬을 수행한 후
 리스트를 병합하며 위의과정을 재귀적으로 반복하는 알고리즘
 
 ![](https://www.101computing.net/wp/wp-content/uploads/Merge-Sort-Algorithm.png)
@@ -273,53 +270,53 @@ n \* $\log n$
 
 ```js
 class HeapSorter {
-	constructor(arr) {
-		this.arr = [...arr];
-	}
+  constructor(arr) {
+    this.arr = [...arr];
+  }
 
-	sortStart() {
-		const terminal = this.arr.length;
+  sortStart() {
+    const terminal = this.arr.length;
 
-		// 배열을 Heap으로 재구성
-		for (let i = Math.floor(terminal / 2) - 1; i >= 0; i--)
-			this.heapify(terminal, i);
+    // 배열을 Heap으로 재구성
+    for (let i = Math.floor(terminal / 2) - 1; i >= 0; i--)
+      this.heapify(terminal, i);
 
-		// 요소를 하나 제거후 다시 Heap 구성
-		for (let i = terminal - 1; i > 0; i--) {
-			[this.arr[0], this.arr[i]] = [this.arr[i], this.arr[0]];
-			this.heapify(i, 0);
-		}
-	}
+    // 요소를 하나 제거후 다시 Heap 구성
+    for (let i = terminal - 1; i > 0; i--) {
+      [this.arr[0], this.arr[i]] = [this.arr[i], this.arr[0]];
+      this.heapify(i, 0);
+    }
+  }
 
-	heapify(terminal, i) {
-		// largest: 최댓값 좌표
-		// i는 부모노드 좌표
-		// left, right child
-		let largest = i;
-		const left = 2 * i + 1;
-		const right = 2 * i + 2;
+  heapify(terminal, i) {
+    // largest: 최댓값 좌표
+    // i는 부모노드 좌표
+    // left, right child
+    let largest = i;
+    const left = 2 * i + 1;
+    const right = 2 * i + 2;
 
-		// left child의 값이 부모보다 크면 최댓값 좌표 변경
-		if (left < terminal && this.arr[left] > this.arr[largest]) {
-			largest = left;
-		}
-		// right child의 값이 부모보다 크면 최댓값 좌표 변경
-		if (right < terminal && this.arr[right] > this.arr[largest]) {
-			largest = right;
-		}
+    // left child의 값이 부모보다 크면 최댓값 좌표 변경
+    if (left < terminal && this.arr[left] > this.arr[largest]) {
+      largest = left;
+    }
+    // right child의 값이 부모보다 크면 최댓값 좌표 변경
+    if (right < terminal && this.arr[right] > this.arr[largest]) {
+      largest = right;
+    }
 
-		// 최댓값 좌표와 부모노드가 불일치하면, 노드 위치 변경
-		if (largest != i) {
-			[this.arr[i], this.arr[largest]] = [this.arr[largest], this.arr[i]];
+    // 최댓값 좌표와 부모노드가 불일치하면, 노드 위치 변경
+    if (largest != i) {
+      [this.arr[i], this.arr[largest]] = [this.arr[largest], this.arr[i]];
 
-			this.heapify(terminal, largest);
-		}
-	}
+      this.heapify(terminal, largest);
+    }
+  }
 
-	sort() {
-		this.sortStart();
-		return this.arr;
-	}
+  sort() {
+    this.sortStart();
+    return this.arr;
+  }
 }
 ```
 
