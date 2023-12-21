@@ -219,32 +219,71 @@ describe("dfsWithStack", () => {
     graph.addEdge(2, 7);
 
     graph.addEdge(9, 20);
-
     expect(graph.dfsWithStack(25).length).toBe(0);
     expect(graph.dfsWithStack(21).length).toBe(1);
 
     expect(graph.dfsWithStack(2).length).toBe(4);
     expect(graph.dfsWithStack(9).length).toBe(2);
   });
+});
 
-  describe("dfsWithRecursion", () => {
-    test("run bfs", () => {
-      const vertexNumber = 22;
-      const graph = new TraversalGraph(vertexNumber);
+describe("dfsWithRecursion", () => {
+  test("run bfs", () => {
+    const vertexNumber = 22;
+    const graph = new TraversalGraph(vertexNumber);
 
-      graph.addEdge(1, 2);
-      graph.addEdge(2, 4);
-      graph.addEdge(2, 5);
-      graph.addEdge(2, 7);
+    graph.addEdge(1, 2);
+    graph.addEdge(2, 4);
+    graph.addEdge(2, 5);
+    graph.addEdge(2, 7);
 
-      graph.addEdge(9, 20);
+    graph.addEdge(9, 20);
 
-      expect(graph.dfsWithRecursion(25).length).toBe(0);
-      expect(graph.dfsWithRecursion(21).length).toBe(1);
+    expect(graph.dfsWithRecursion(25).length).toBe(0);
+    expect(graph.dfsWithRecursion(21).length).toBe(1);
 
-      expect(graph.dfsWithRecursion(2).length).toBe(4);
-      expect(graph.dfsWithRecursion(9).length).toBe(2);
-    });
+    expect(graph.dfsWithRecursion(2).length).toBe(4);
+    expect(graph.dfsWithRecursion(9).length).toBe(2);
+  });
+});
+
+describe("bfsWithQueue", () => {
+  test("run dfsWithStack", () => {
+    const vertexNumber = 22;
+    const graph = new TraversalGraph(vertexNumber);
+
+    graph.addEdge(1, 2);
+    graph.addEdge(2, 4);
+    graph.addEdge(2, 5);
+    graph.addEdge(2, 7);
+
+    graph.addEdge(9, 20);
+
+    expect(graph.bfsWithQueue(25).length).toBe(0);
+    expect(graph.bfsWithQueue(21).length).toBe(1);
+
+    expect(graph.bfsWithQueue(2).length).toBe(4);
+    expect(graph.bfsWithQueue(9).length).toBe(2);
+  });
+});
+
+describe("bfsWithRecursion", () => {
+  test("run bfsWithRecursion", () => {
+    const vertexNumber = 22;
+    const graph = new TraversalGraph(vertexNumber);
+
+    graph.addEdge(1, 2);
+    graph.addEdge(2, 4);
+    graph.addEdge(2, 5);
+    graph.addEdge(2, 7);
+
+    graph.addEdge(9, 20);
+
+    expect(graph.bfsWithRecursion(25).length).toBe(0);
+    expect(graph.bfsWithRecursion(21).length).toBe(1);
+
+    expect(graph.bfsWithRecursion(2).length).toBe(4);
+    expect(graph.bfsWithRecursion(9).length).toBe(2);
   });
 });
 
@@ -296,7 +335,7 @@ export class TraversalGraph implements ITraversalGraph {
   }
 
   dfsWithStack(vertex: number) {
-    if (vertex >= this.vertexNumber || this.getVertexEdges(vertex)) {
+    if (this.vertexNumber <= vertex || !this.getVertexEdges(vertex)) {
       return [];
     }
     const stack: number[] = [];
@@ -331,7 +370,7 @@ export class TraversalGraph implements ITraversalGraph {
         visited.set(currentVertex, true);
         const children = this.getVertexEdges(currentVertex)!;
         for (const child of children) {
-          if (!visited.get(child)) {
+          if (!visited.has(child)) {
             queue.push(child);
           }
         }
@@ -346,22 +385,24 @@ export class TraversalGraph implements ITraversalGraph {
 
     let nextLevelNodes: number[] = [];
 
-    for (let node of edges) {
-      if (!visited.get(node)) {
+    for (const node of edges) {
+      if (!visited.has(node)) {
         visited.set(node, true);
-        let children: number[] | undefined = this.getVertexEdges(node);
+        const children = this.getVertexEdges(node);
         if (children) {
           nextLevelNodes.push(...children.filter((n) => !visited.has(n)));
         }
       }
     }
-
     this.bfsVisitVertex(nextLevelNodes, visited);
   }
 
   bfsWithRecursion(vertex: number) {
-    let visited = new Map();
-    let levelNodes = [vertex];
+    if (vertex >= this.vertexNumber) {
+      return [];
+    }
+    const visited = new Map<number, boolean>();
+    const levelNodes = [vertex];
 
     this.bfsVisitVertex(levelNodes, visited);
     return [...visited.keys()];
