@@ -43,7 +43,7 @@ Dependency Inversion Principle
 ![](https://www.oreilly.com/api/v2/epubs/9781492077992/files/assets/f0138-01.png)
 
 의존성 역전원칙을 적용한 구조
-![](<![](https://www.oreilly.com/api/v2/epubs/9781492077992/files/assets/f0140-01.png)>)
+![](https://www.oreilly.com/api/v2/epubs/9781492077992/files/assets/f0140-01.png)
 
 ### 정책과 세부사항
 
@@ -180,17 +180,27 @@ IListController의 구현체들에 맞춰 코드를 변경할 필요가 없음
 구독 모듈이 ListController의 구체적인 구현에 의존할 때에는
 2번과 3번의 구현을 함께 해야 했지만, `Interface`에 의존할때에는 분리해서 할 수도 있음
 
-```
-
 ---
 
 # Question
+
+1. 구현체가 아닌 추상적인 interface에 의존하면 어떤 장점이 있나요?
 
 ---
 
 # Answer
 
+1. 특정 class가 다른 class의 구현체가 아닌 추상적인 interface에 의존하면 어떤 장점이 있나요?
+
+좀더 느슨하게 결합이 되므로, 유연성이 증가합니다.
+
+의존대상인 모듈의 interface만 변경되지않는다면, 구현 내용이 어떻게 바뀌어도 상관이없으므로,
+유연하게 구현체를 변경할 수있고, 그러므로, 작업을 분배하여 협업하기에도 유리합니다.
+
 ---
 
 # References
+
+```
+
 ```
